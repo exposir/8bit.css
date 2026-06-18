@@ -1,0 +1,110 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>8bit.css — Examples</title>
+  <link rel="preload" href="../public/fonts/PressStart2P.woff2" as="font" type="font/woff2" crossorigin>
+  <style>
+    @font-face {
+      font-family: "Press Start 2P";
+      font-style: normal;
+      font-weight: 400;
+      font-display: block;
+      src: url("../public/fonts/PressStart2P.woff2") format("woff2");
+    }
+  </style>
+  <link rel="stylesheet" href="../css/8bit.css">
+  <style>
+    body {
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      padding: 3rem 2rem;
+    }
+    h1 {
+      font-size: 2rem;
+      margin-bottom: 0.5rem;
+      letter-spacing: 4px;
+    }
+    .subtitle {
+      font-size: 0.5rem;
+      margin-bottom: 4rem;
+      color: #888;
+    }
+    .grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+      gap: 2.5rem;
+      max-width: 900px;
+      width: 100%;
+    }
+    .card {
+      text-decoration: none;
+      color: inherit;
+      display: block;
+      transition: transform 0.1s;
+    }
+    .card:hover {
+      transform: translateY(-4px);
+    }
+    .card-icon {
+      font-size: 2rem;
+      margin-bottom: 1rem;
+      display: block;
+    }
+    .card-title {
+      font-size: 0.75rem;
+      margin-bottom: 0.75rem;
+    }
+    .card-desc {
+      font-size: 0.4rem;
+      line-height: 2.2;
+      color: #666;
+    }
+  </style>
+</head>
+<body>
+  <h1 class="is-blinking">8BIT.CSS</h1>
+  <p class="subtitle">— component examples —</p>
+
+  <div class="grid">
+    <a href="rpg.html" class="card">
+      <div class="bit-container bit-with-title">
+        <p class="bit-title">RPG</p>
+        <span class="card-icon">⚔️</span>
+        <p class="card-title">Battle Scene</p>
+        <p class="card-desc">Turn-based JRPG battle with HP bars, action menu, and animated battle log.</p>
+      </div>
+    </a>
+
+    <a href="login.html" class="card">
+      <div class="bit-container bit-with-title">
+        <p class="bit-title">Form</p>
+        <span class="card-icon">🎮</span>
+        <p class="card-title">Player Login</p>
+        <p class="card-desc">Pixel-art login screen with inputs, checkbox, and validation states.</p>
+      </div>
+    </a>
+
+    <a href="leaderboard.html" class="card">
+      <div class="bit-container bit-with-title">
+        <p class="bit-title">Table</p>
+        <span class="card-icon">🏆</span>
+        <p class="card-title">Leaderboard</p>
+        <p class="card-desc">Hall of fame with ranked table, badges, and score progress bars.</p>
+      </div>
+    </a>
+
+    <a href="settings.html" class="card">
+      <div class="bit-container bit-with-title">
+        <p class="bit-title">Controls</p>
+        <span class="card-icon">⚙️</span>
+        <p class="card-title">Game Settings</p>
+        <p class="card-desc">Settings panel with radio buttons, selects, toggles, and sliders.</p>
+      </div>
+    </a>
+  </div>
+</body>
+</html>

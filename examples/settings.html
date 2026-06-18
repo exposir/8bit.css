@@ -1,0 +1,320 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Game Settings — 8bit.css</title>
+  <link rel="preload" href="../public/fonts/PressStart2P.woff2" as="font" type="font/woff2" crossorigin>
+  <style>
+    @font-face {
+      font-family: "Press Start 2P";
+      font-style: normal;
+      font-weight: 400;
+      font-display: block;
+      src: url("../public/fonts/PressStart2P.woff2") format("woff2");
+    }
+  </style>
+  <link rel="stylesheet" href="../css/8bit.css">
+  <style>
+    body {
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      padding: 2rem;
+      gap: 2rem;
+    }
+
+    .back { align-self: flex-start; font-size: 0.5rem; }
+
+    h1 {
+      font-size: 1rem;
+      letter-spacing: 3px;
+    }
+
+    .settings-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+      gap: 2rem;
+      width: 100%;
+      max-width: 760px;
+    }
+
+    .section-title {
+      font-size: 0.5rem;
+      color: #8b949e;
+      margin-bottom: 1.25rem;
+      letter-spacing: 2px;
+    }
+
+    .setting-row {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 1rem;
+      margin-bottom: 1.25rem;
+    }
+
+    .setting-label {
+      font-size: 0.45rem;
+      flex-shrink: 0;
+    }
+
+    .radio-group {
+      display: flex;
+      flex-direction: column;
+      gap: 0.6rem;
+      margin-bottom: 1.25rem;
+    }
+
+    .volume-row {
+      display: flex;
+      flex-direction: column;
+      gap: 0.6rem;
+      margin-bottom: 1.25rem;
+    }
+
+    .volume-label {
+      display: flex;
+      justify-content: space-between;
+      font-size: 0.45rem;
+    }
+
+    .volume-val { color: #209cee; }
+
+    input[type="range"] {
+      width: 100%;
+      accent-color: var(--8bit-btn-primary-bg);
+      cursor: pointer;
+    }
+
+    .footer-actions {
+      display: flex;
+      gap: 1rem;
+      justify-content: flex-end;
+      margin-top: 0.5rem;
+      flex-wrap: wrap;
+    }
+
+    .danger-zone {
+      border-top: 4px solid var(--8bit-btn-error-bg);
+    }
+
+    /* Confirm dialog backdrop */
+    .backdrop {
+      position: fixed;
+      inset: 0;
+      background: rgb(0 0 0 / 60%);
+      display: none;
+      z-index: 99;
+    }
+    .backdrop.show { display: block; }
+  </style>
+</head>
+<body>
+  <a href="index.html" class="back bit-btn">← BACK</a>
+  <h1>⚙ SETTINGS</h1>
+
+  <div class="settings-grid">
+
+    <!-- Display -->
+    <div class="bit-container bit-with-title">
+      <p class="bit-title">DISPLAY</p>
+      <p class="section-title">SCREEN MODE</p>
+      <div class="radio-group">
+        <label class="bit-radio">
+          <input type="radio" name="screen" value="fullscreen" checked>
+          <span>Full Screen</span>
+        </label>
+        <label class="bit-radio">
+          <input type="radio" name="screen" value="windowed">
+          <span>Windowed</span>
+        </label>
+        <label class="bit-radio">
+          <input type="radio" name="screen" value="borderless">
+          <span>Borderless</span>
+        </label>
+      </div>
+
+      <p class="section-title">RESOLUTION</p>
+      <div class="bit-select" style="width:100%">
+        <select style="width:100%">
+          <option>1920 × 1080</option>
+          <option>1280 × 720</option>
+          <option>854 × 480</option>
+          <option selected>640 × 360 (8-bit)</option>
+        </select>
+      </div>
+    </div>
+
+    <!-- Audio -->
+    <div class="bit-container bit-with-title">
+      <p class="bit-title">AUDIO</p>
+
+      <div class="volume-row">
+        <div class="volume-label">
+          <span>🎵 MUSIC</span>
+          <span class="volume-val" id="music-val">70%</span>
+        </div>
+        <input type="range" min="0" max="100" value="70"
+          oninput="document.getElementById('music-val').textContent = this.value + '%'">
+      </div>
+
+      <div class="volume-row">
+        <div class="volume-label">
+          <span>🔊 SFX</span>
+          <span class="volume-val" id="sfx-val">85%</span>
+        </div>
+        <input type="range" min="0" max="100" value="85"
+          oninput="document.getElementById('sfx-val').textContent = this.value + '%'">
+      </div>
+
+      <div class="volume-row">
+        <div class="volume-label">
+          <span>🗣 VOICE</span>
+          <span class="volume-val" id="voice-val">50%</span>
+        </div>
+        <input type="range" min="0" max="100" value="50"
+          oninput="document.getElementById('voice-val').textContent = this.value + '%'">
+      </div>
+
+      <p class="section-title" style="margin-top:0.5rem">OPTIONS</p>
+      <div style="display:flex;flex-direction:column;gap:0.6rem">
+        <label class="bit-checkbox">
+          <input type="checkbox" checked>
+          <span>Stereo sound</span>
+        </label>
+        <label class="bit-checkbox">
+          <input type="checkbox" checked>
+          <span>Subtitles</span>
+        </label>
+        <label class="bit-checkbox">
+          <input type="checkbox">
+          <span>Mute on focus loss</span>
+        </label>
+      </div>
+    </div>
+
+    <!-- Gameplay -->
+    <div class="bit-container bit-with-title">
+      <p class="bit-title">GAMEPLAY</p>
+
+      <p class="section-title">DIFFICULTY</p>
+      <div class="radio-group">
+        <label class="bit-radio">
+          <input type="radio" name="diff" value="easy">
+          <span>Easy <span class="bit-badge is-success" style="font-size:0.3rem">CASUAL</span></span>
+        </label>
+        <label class="bit-radio">
+          <input type="radio" name="diff" value="normal" checked>
+          <span>Normal <span class="bit-badge is-primary" style="font-size:0.3rem">CLASSIC</span></span>
+        </label>
+        <label class="bit-radio">
+          <input type="radio" name="diff" value="hard">
+          <span>Hard <span class="bit-badge is-error" style="font-size:0.3rem">BRUTAL</span></span>
+        </label>
+      </div>
+
+      <p class="section-title">CONTROLS</p>
+      <div style="display:flex;flex-direction:column;gap:0.6rem">
+        <label class="bit-checkbox">
+          <input type="checkbox" checked>
+          <span>Vibration</span>
+        </label>
+        <label class="bit-checkbox">
+          <input type="checkbox" checked>
+          <span>Auto-save</span>
+        </label>
+        <label class="bit-checkbox">
+          <input type="checkbox">
+          <span>Tutorial hints</span>
+        </label>
+      </div>
+    </div>
+
+    <!-- Danger zone -->
+    <div class="bit-container bit-with-title danger-zone">
+      <p class="bit-title" style="color:var(--8bit-btn-error-bg)">DANGER</p>
+      <p class="section-title">IRREVERSIBLE ACTIONS</p>
+
+      <div style="display:flex;flex-direction:column;gap:1rem">
+        <div>
+          <p style="font-size:0.4rem;margin-bottom:0.5rem;color:#8b949e">Delete all save files and start over.</p>
+          <button class="bit-btn is-error" onclick="confirmReset()">RESET SAVE DATA</button>
+        </div>
+        <div>
+          <p style="font-size:0.4rem;margin-bottom:0.5rem;color:#8b949e">Permanently delete your account.</p>
+          <button class="bit-btn is-error" onclick="confirmDelete()">DELETE ACCOUNT</button>
+        </div>
+      </div>
+    </div>
+
+  </div>
+
+  <!-- Save bar -->
+  <div style="display:flex;gap:1rem;width:100%;max-width:760px;justify-content:flex-end">
+    <button class="bit-btn" onclick="showToast('Changes discarded.')">DISCARD</button>
+    <button class="bit-btn is-success" onclick="showToast('Settings saved! ✓')">SAVE CHANGES</button>
+  </div>
+
+  <!-- Confirm dialog -->
+  <div class="backdrop" id="backdrop" onclick="closeDialog()"></div>
+  <div class="bit-dialog" id="confirm-dialog" style="display:none">
+    <div class="bit-dialog-header" id="dialog-title">CONFIRM</div>
+    <div class="bit-dialog-body" id="dialog-body">Are you sure?</div>
+    <div class="bit-dialog-footer">
+      <button class="bit-btn" onclick="closeDialog()">CANCEL</button>
+      <button class="bit-btn is-error" onclick="doConfirm()">CONFIRM</button>
+    </div>
+  </div>
+
+  <!-- Toast -->
+  <div id="toast" style="
+    position:fixed;bottom:2rem;left:50%;transform:translateX(-50%);
+    padding:0.75rem 1.25rem;font-size:0.5rem;
+    background:var(--8bit-btn-success-bg);color:#fff;
+    opacity:0;transition:opacity 0.3s;pointer-events:none;white-space:nowrap;
+  "></div>
+
+  <script>
+    let confirmCallback = null;
+
+    function confirmReset() {
+      document.getElementById('dialog-title').textContent = 'RESET SAVE?';
+      document.getElementById('dialog-body').textContent = 'All progress will be lost. This cannot be undone.';
+      confirmCallback = () => showToast('Save data deleted.');
+      openDialog();
+    }
+
+    function confirmDelete() {
+      document.getElementById('dialog-title').textContent = 'DELETE ACCOUNT?';
+      document.getElementById('dialog-body').textContent = 'Your account will be permanently removed.';
+      confirmCallback = () => showToast('Account scheduled for deletion.');
+      openDialog();
+    }
+
+    function openDialog() {
+      document.getElementById('confirm-dialog').style.display = 'block';
+      document.getElementById('backdrop').classList.add('show');
+    }
+
+    function closeDialog() {
+      document.getElementById('confirm-dialog').style.display = 'none';
+      document.getElementById('backdrop').classList.remove('show');
+    }
+
+    function doConfirm() {
+      closeDialog();
+      if (confirmCallback) confirmCallback();
+      confirmCallback = null;
+    }
+
+    function showToast(msg) {
+      const t = document.getElementById('toast');
+      t.textContent = msg;
+      t.style.opacity = '1';
+      setTimeout(() => t.style.opacity = '0', 2500);
+    }
+  </script>
+</body>
+</html>

@@ -1,0 +1,209 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Player Login — 8bit.css</title>
+  <link rel="preload" href="../public/fonts/PressStart2P.woff2" as="font" type="font/woff2" crossorigin>
+  <style>
+    @font-face {
+      font-family: "Press Start 2P";
+      font-style: normal;
+      font-weight: 400;
+      font-display: block;
+      src: url("../public/fonts/PressStart2P.woff2") format("woff2");
+    }
+  </style>
+  <link rel="stylesheet" href="../css/8bit.css">
+  <style>
+    body {
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      padding: 2rem;
+      gap: 2rem;
+    }
+
+    .back { align-self: flex-start; font-size: 0.5rem; }
+
+    .logo {
+      font-size: 1.2rem;
+      letter-spacing: 4px;
+      color: #209cee;
+      text-align: center;
+    }
+
+    .logo span { color: #f7d51d; }
+
+    form {
+      width: 100%;
+      max-width: 400px;
+      display: flex;
+      flex-direction: column;
+      gap: 1.25rem;
+    }
+
+    .field-label {
+      display: block;
+      font-size: 0.5rem;
+      margin-bottom: 0.5rem;
+      color: #8b949e;
+    }
+
+    .field-error {
+      font-size: 0.4rem;
+      color: var(--8bit-btn-error-bg);
+      margin-top: 0.4rem;
+      display: none;
+    }
+
+    .field-error.visible { display: block; }
+
+    .form-footer {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 1rem;
+      flex-wrap: wrap;
+    }
+
+    .divider {
+      text-align: center;
+      font-size: 0.4rem;
+      color: #8b949e;
+      margin: 0.5rem 0;
+    }
+
+    .register-btn {
+      width: 100%;
+    }
+
+    .toast {
+      position: fixed;
+      bottom: 2rem;
+      left: 50%;
+      transform: translateX(-50%);
+      padding: 0.75rem 1.5rem;
+      font-size: 0.5rem;
+      background: var(--8bit-btn-success-bg);
+      color: #fff;
+      opacity: 0;
+      transition: opacity 0.3s;
+      pointer-events: none;
+      white-space: nowrap;
+    }
+
+    .toast.show { opacity: 1; }
+  </style>
+</head>
+<body>
+  <a href="index.html" class="back bit-btn">← BACK</a>
+
+  <p class="logo">PIXEL<span>QUEST</span></p>
+
+  <form novalidate onsubmit="handleLogin(event)">
+    <div class="bit-container bit-with-title">
+      <p class="bit-title">LOGIN</p>
+
+      <div>
+        <label class="field-label" for="username">PLAYER NAME</label>
+        <input class="bit-input" id="username" type="text" placeholder="Enter your name..." autocomplete="username">
+        <p class="field-error" id="username-err">Username is required.</p>
+      </div>
+
+      <div>
+        <label class="field-label" for="password">PASSWORD</label>
+        <input class="bit-input" id="password" type="password" placeholder="••••••••" autocomplete="current-password">
+        <p class="field-error" id="password-err">Password must be 6+ characters.</p>
+      </div>
+
+      <div class="form-footer">
+        <label class="bit-checkbox">
+          <input type="checkbox" id="remember">
+          <span>Remember me</span>
+        </label>
+        <span class="bit-badge is-primary">FREE PLAY</span>
+      </div>
+
+      <br>
+      <button type="submit" class="bit-btn is-primary" style="width:100%">▶ START GAME</button>
+    </div>
+
+    <div class="divider">— OR —</div>
+
+    <button type="button" class="bit-btn register-btn" onclick="showRegister()">NEW PLAYER? REGISTER</button>
+  </form>
+
+  <!-- Register dialog -->
+  <div class="bit-dialog" id="register-dialog" style="display:none">
+    <div class="bit-dialog-header">NEW PLAYER</div>
+    <div class="bit-dialog-body">
+      <label class="field-label" for="reg-name">PLAYER NAME</label>
+      <input class="bit-input" id="reg-name" type="text" placeholder="Choose a name..." style="margin-bottom:1rem">
+      <label class="field-label" for="reg-pass">PASSWORD</label>
+      <input class="bit-input" id="reg-pass" type="password" placeholder="Set a password...">
+    </div>
+    <div class="bit-dialog-footer">
+      <button class="bit-btn" onclick="closeRegister()">CANCEL</button>
+      <button class="bit-btn is-success" onclick="doRegister()">CREATE</button>
+    </div>
+  </div>
+
+  <div class="toast" id="toast"></div>
+
+  <script>
+    function handleLogin(e) {
+      e.preventDefault();
+      const name = document.getElementById('username').value.trim();
+      const pass = document.getElementById('password').value;
+      let ok = true;
+
+      const nameErr = document.getElementById('username-err');
+      const passErr = document.getElementById('password-err');
+      const nameInput = document.getElementById('username');
+      const passInput = document.getElementById('password');
+
+      nameErr.classList.remove('visible');
+      passErr.classList.remove('visible');
+      nameInput.classList.remove('is-error');
+      passInput.classList.remove('is-error');
+
+      if (!name) {
+        nameErr.classList.add('visible');
+        nameInput.classList.add('is-error');
+        ok = false;
+      }
+      if (pass.length < 6) {
+        passErr.classList.add('visible');
+        passInput.classList.add('is-error');
+        ok = false;
+      }
+      if (ok) showToast('Welcome back, ' + name + '! 🎮');
+    }
+
+    function showRegister() {
+      document.getElementById('register-dialog').style.display = 'block';
+    }
+
+    function closeRegister() {
+      document.getElementById('register-dialog').style.display = 'none';
+    }
+
+    function doRegister() {
+      const name = document.getElementById('reg-name').value.trim();
+      if (!name) return;
+      closeRegister();
+      showToast('Account created! Welcome, ' + name + '!');
+    }
+
+    function showToast(msg) {
+      const t = document.getElementById('toast');
+      t.textContent = msg;
+      t.classList.add('show');
+      setTimeout(() => t.classList.remove('show'), 2800);
+    }
+  </script>
+</body>
+</html>

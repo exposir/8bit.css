@@ -1,0 +1,305 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Battle Scene — 8bit.css</title>
+  <link rel="preload" href="../public/fonts/PressStart2P.woff2" as="font" type="font/woff2" crossorigin>
+  <style>
+    @font-face {
+      font-family: "Press Start 2P";
+      font-style: normal;
+      font-weight: 400;
+      font-display: block;
+      src: url("../public/fonts/PressStart2P.woff2") format("woff2");
+    }
+  </style>
+  <link rel="stylesheet" href="../css/8bit.css">
+  <style>
+    :root {
+      --8bit-bg-color: #0d1117;
+      --8bit-base-color: #e6edf3;
+      --8bit-container-bg: #161b22;
+      --8bit-balloon-bg: #1f2937;
+      --8bit-btn-default-bg: #21262d;
+      --8bit-btn-default-hover: #30363d;
+      --8bit-btn-default-shadow: #6e7681;
+      --8bit-progress-bg: #21262d;
+    }
+
+    body {
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      padding: 2rem;
+      gap: 1.5rem;
+    }
+
+    .back { align-self: flex-start; font-size: 0.5rem; }
+
+    .scene-title {
+      font-size: 0.6rem;
+      letter-spacing: 3px;
+      color: #f7d51d;
+    }
+
+    .battle-arena {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 2rem;
+      width: 100%;
+      max-width: 680px;
+    }
+
+    .fighter-name {
+      font-size: 0.6rem;
+      margin-bottom: 0.75rem;
+      letter-spacing: 2px;
+    }
+
+    .stat-row {
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+      margin-bottom: 0.5rem;
+      font-size: 0.4rem;
+    }
+
+    .stat-label { width: 2.5rem; color: #8b949e; }
+
+    .stat-val {
+      margin-left: auto;
+      color: #8b949e;
+      white-space: nowrap;
+    }
+
+    .sprite {
+      font-size: 3rem;
+      text-align: center;
+      margin: 1rem 0;
+      display: block;
+    }
+
+    .enemy-side { text-align: right; }
+    .enemy-side .stat-row { flex-direction: row-reverse; }
+    .enemy-side .stat-label { text-align: right; }
+
+    .log-box {
+      width: 100%;
+      max-width: 680px;
+    }
+
+    .log-text {
+      font-size: 0.5rem;
+      line-height: 2.5;
+      min-height: 3.5rem;
+    }
+
+    .cursor { animation: bit-blink 0.8s step-end infinite; }
+
+    .actions {
+      display: flex;
+      gap: 1rem;
+      flex-wrap: wrap;
+      justify-content: center;
+    }
+
+    .actions .bit-btn { font-size: 0.55rem; min-width: 90px; }
+
+    .overlay {
+      position: fixed;
+      inset: 0;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      background: rgb(0 0 0 / 85%);
+      z-index: 200;
+    }
+
+    .overlay.hidden { display: none; }
+
+    .result-box { text-align: center; }
+    .result-title { font-size: 1.5rem; margin-bottom: 2rem; }
+    .result-title.win { color: #f7d51d; }
+    .result-title.lose { color: #e76e55; }
+  </style>
+</head>
+<body>
+  <a href="index.html" class="back bit-btn">← BACK</a>
+
+  <p class="scene-title">⚔ DRAGON'S LAIR — STAGE 3 ⚔</p>
+
+  <div class="battle-arena">
+    <!-- Hero -->
+    <div class="bit-container">
+      <span class="sprite">🧙</span>
+      <p class="fighter-name">HERO</p>
+      <div class="stat-row">
+        <span class="stat-label">HP</span>
+        <progress id="hero-hp-bar" class="bit-progress is-success" value="80" max="100" style="flex:1"></progress>
+        <span class="stat-val" id="hero-hp-val">80/100</span>
+      </div>
+      <div class="stat-row">
+        <span class="stat-label">MP</span>
+        <progress id="hero-mp-bar" class="bit-progress is-primary" value="40" max="60" style="flex:1"></progress>
+        <span class="stat-val" id="hero-mp-val">40/60</span>
+      </div>
+    </div>
+
+    <!-- Enemy -->
+    <div class="bit-container enemy-side">
+      <span class="sprite">🐉</span>
+      <p class="fighter-name">DRAGON</p>
+      <div class="stat-row">
+        <span class="stat-label">HP</span>
+        <progress id="enemy-hp-bar" class="bit-progress is-error" value="200" max="200" style="flex:1"></progress>
+        <span class="stat-val" id="enemy-hp-val">200/200</span>
+      </div>
+    </div>
+  </div>
+
+  <!-- Battle log -->
+  <div class="log-box">
+    <div class="bit-balloon">
+      <p class="log-text" id="log">The DRAGON appears!<span class="cursor">_</span></p>
+    </div>
+  </div>
+
+  <!-- Action buttons -->
+  <div class="actions" id="actions">
+    <button class="bit-btn is-error" onclick="doAction('attack')">⚔ ATTACK</button>
+    <button class="bit-btn is-primary" onclick="doAction('magic')">✨ MAGIC</button>
+    <button class="bit-btn is-success" onclick="doAction('item')">🧪 ITEM</button>
+    <button class="bit-btn" onclick="doAction('run')">💨 RUN</button>
+  </div>
+
+  <!-- Result overlay -->
+  <div class="overlay hidden" id="overlay">
+    <div class="bit-container result-box">
+      <p class="result-title" id="result-title">VICTORY!</p>
+      <button class="bit-btn is-primary" onclick="restartGame()">PLAY AGAIN</button>
+    </div>
+  </div>
+
+  <script>
+    const state = {
+      heroHp: 80, heroMp: 40,
+      enemyHp: 200,
+      busy: false,
+    };
+
+    function rand(min, max) {
+      return Math.floor(Math.random() * (max - min + 1)) + min;
+    }
+
+    function setLog(text) {
+      document.getElementById('log').innerHTML = text + '<span class="cursor">_</span>';
+    }
+
+    function updateBars() {
+      const hh = Math.max(0, state.heroHp);
+      const eh = Math.max(0, state.enemyHp);
+      document.getElementById('hero-hp-bar').value = hh;
+      document.getElementById('hero-hp-val').textContent = hh + '/100';
+      document.getElementById('hero-mp-bar').value = state.heroMp;
+      document.getElementById('hero-mp-val').textContent = state.heroMp + '/60';
+      document.getElementById('enemy-hp-bar').value = eh;
+      document.getElementById('enemy-hp-val').textContent = eh + '/200';
+    }
+
+    function setActionsDisabled(disabled) {
+      document.querySelectorAll('#actions .bit-btn').forEach(b => {
+        if (disabled) b.classList.add('is-disabled');
+        else b.classList.remove('is-disabled');
+      });
+    }
+
+    function checkEnd() {
+      if (state.enemyHp <= 0) {
+        setTimeout(() => {
+          document.getElementById('result-title').textContent = '🏆 VICTORY!';
+          document.getElementById('result-title').className = 'result-title win';
+          document.getElementById('overlay').classList.remove('hidden');
+        }, 600);
+        return true;
+      }
+      if (state.heroHp <= 0) {
+        setTimeout(() => {
+          document.getElementById('result-title').textContent = '💀 GAME OVER';
+          document.getElementById('result-title').className = 'result-title lose';
+          document.getElementById('overlay').classList.remove('hidden');
+        }, 600);
+        return true;
+      }
+      return false;
+    }
+
+    function enemyTurn() {
+      const dmg = rand(12, 22);
+      state.heroHp -= dmg;
+      updateBars();
+      const msgs = [
+        `The DRAGON breathes fire! HERO takes ${dmg} damage!`,
+        `The DRAGON slashes! HERO takes ${dmg} damage!`,
+        `The DRAGON roars and strikes for ${dmg} damage!`,
+      ];
+      setLog(msgs[rand(0, msgs.length - 1)]);
+      if (!checkEnd()) {
+        setTimeout(() => {
+          setLog('What will HERO do?');
+          setActionsDisabled(false);
+          state.busy = false;
+        }, 1200);
+      }
+    }
+
+    function doAction(action) {
+      if (state.busy) return;
+      state.busy = true;
+      setActionsDisabled(true);
+
+      if (action === 'attack') {
+        const dmg = rand(28, 48);
+        state.enemyHp -= dmg;
+        updateBars();
+        setLog(`HERO attacks for ${dmg} damage!`);
+        if (!checkEnd()) setTimeout(enemyTurn, 1200);
+
+      } else if (action === 'magic') {
+        if (state.heroMp < 20) {
+          setLog('Not enough MP!');
+          setTimeout(() => { setActionsDisabled(false); state.busy = false; }, 1000);
+          return;
+        }
+        const dmg = rand(60, 85);
+        state.heroMp -= 20;
+        state.enemyHp -= dmg;
+        updateBars();
+        setLog(`✨ FIRE BLAST! DRAGON takes ${dmg} damage!`);
+        if (!checkEnd()) setTimeout(enemyTurn, 1200);
+
+      } else if (action === 'item') {
+        const heal = rand(25, 35);
+        state.heroHp = Math.min(100, state.heroHp + heal);
+        updateBars();
+        setLog(`HERO drinks a potion and recovers ${heal} HP!`);
+        setTimeout(enemyTurn, 1200);
+
+      } else if (action === 'run') {
+        setLog("Can't escape from this battle!");
+        setTimeout(() => { setActionsDisabled(false); state.busy = false; }, 1000);
+      }
+    }
+
+    function restartGame() {
+      state.heroHp = 80; state.heroMp = 40; state.enemyHp = 200; state.busy = false;
+      updateBars();
+      setLog('The DRAGON appears!');
+      setActionsDisabled(false);
+      document.getElementById('overlay').classList.add('hidden');
+    }
+  </script>
+</body>
+</html>
