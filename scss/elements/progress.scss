@@ -1,0 +1,33 @@
+@use "../utilities/mixins" as mix;
+
+.bit-progress {
+  @include mix.pixel-border-compact;
+
+  display: block;
+  width: 100%;
+  height: var(--8bit-progress-height);
+  padding: 0;
+  overflow: hidden;
+  appearance: none;
+  background-color: var(--8bit-progress-bg);
+
+  &::-webkit-progress-bar {
+    background-color: var(--8bit-progress-bg);
+  }
+
+  &::-webkit-progress-value {
+    background-color: var(--8bit-progress-fill);
+  }
+
+  &::-moz-progress-bar {
+    background-color: var(--8bit-progress-fill);
+  }
+
+  $variants: "primary", "success", "warning", "error";
+
+  @each $v in $variants {
+    &.is-#{$v} {
+      --8bit-progress-fill: var(--8bit-btn-#{$v}-bg);
+    }
+  }
+}

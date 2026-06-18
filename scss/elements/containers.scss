@@ -1,0 +1,38 @@
+@use "../utilities/mixins" as mix;
+
+.bit-container {
+  @include mix.pixel-border;
+
+  position: relative;
+  padding: 1.5rem;
+  background-color: var(--8bit-container-bg);
+
+  &.bit-with-title {
+    margin-top: 1.5rem;
+
+    > .bit-title {
+      position: absolute;
+      top: -1.5rem;
+      left: 1rem;
+      display: inline-block;
+      padding: 0 0.25rem;
+      background-color: var(--8bit-container-bg);
+      font-size: 1rem;
+    }
+  }
+
+  &.is-dark {
+    color: var(--8bit-color-white);
+    background-color: var(--8bit-color-black);
+
+    @include mix.pixel-border($c: #fff);
+
+    &.bit-with-title > .bit-title {
+      background-color: var(--8bit-color-black);
+    }
+  }
+
+  &.is-rounded {
+    @include mix.pixel-border;
+  }
+}

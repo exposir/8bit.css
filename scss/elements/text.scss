@@ -1,0 +1,19 @@
+.bit-text {
+  &.is-primary { color: var(--8bit-btn-primary-bg); }
+  &.is-success { color: var(--8bit-btn-success-bg); }
+  &.is-warning { color: var(--8bit-btn-warning-shadow); }
+  &.is-error   { color: var(--8bit-btn-error-bg); }
+  &.is-disabled { color: #adafbc; }
+
+  &.is-small  { font-size: 0.75rem; }
+  &.is-medium { font-size: 1.25rem; }
+  &.is-large  { font-size: 1.5rem; }
+}
+
+// Pixel-art heading underline
+.bit-header {
+  display: inline-block;
+  padding-bottom: 0.5rem;
+  border-bottom: 4px solid var(--8bit-base-color);
+  margin-bottom: 1rem;
+}

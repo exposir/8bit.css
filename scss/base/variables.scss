@@ -1,0 +1,52 @@
+// CSS Custom Properties — all runtime-themeable
+:root {
+  // Colors
+  --8bit-color-black: #212529;
+  --8bit-color-white: #fff;
+
+  // Base
+  --8bit-font-family: "Press Start 2P", serif;
+  --8bit-font-size: 16px;
+  --8bit-base-color: var(--8bit-color-black);
+  --8bit-bg-color: var(--8bit-color-white);
+  --8bit-border-size: 4px;
+
+  // Button variants
+  --8bit-btn-default-bg: #fff;
+  --8bit-btn-default-hover: #e7e7e7;
+  --8bit-btn-default-shadow: #adafbc;
+
+  --8bit-btn-primary-bg: #209cee;
+  --8bit-btn-primary-hover: #108de0;
+  --8bit-btn-primary-shadow: #006bb3;
+
+  --8bit-btn-success-bg: #92cc41;
+  --8bit-btn-success-hover: #76c442;
+  --8bit-btn-success-shadow: #4aa52e;
+
+  --8bit-btn-warning-bg: #f7d51d;
+  --8bit-btn-warning-hover: #f2c409;
+  --8bit-btn-warning-shadow: #e59400;
+
+  --8bit-btn-error-bg: #e76e55;
+  --8bit-btn-error-hover: #ce372b;
+  --8bit-btn-error-shadow: #8c2022;
+
+  --8bit-btn-disabled-bg: #d3d3d3;
+  --8bit-btn-disabled-shadow: #adafbc;
+
+  // Progress bar
+  --8bit-progress-bg: #fff;
+  --8bit-progress-fill: var(--8bit-btn-primary-bg);
+  --8bit-progress-height: 25px;
+
+  // Input
+  --8bit-input-bg: #fff;
+  --8bit-input-border-color: var(--8bit-color-black);
+
+  // Container
+  --8bit-container-bg: #fff;
+
+  // Balloon
+  --8bit-balloon-bg: #fff;
+}

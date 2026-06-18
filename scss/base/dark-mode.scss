@@ -1,0 +1,34 @@
+@media (prefers-color-scheme: dark) {
+  :root {
+    --8bit-base-color: #fff;
+    --8bit-bg-color: #212529;
+    --8bit-container-bg: #212529;
+    --8bit-balloon-bg: #212529;
+    --8bit-input-bg: #2c3034;
+    --8bit-progress-bg: #2c3034;
+
+    --8bit-btn-default-bg: #343a40;
+    --8bit-btn-default-hover: #495057;
+    --8bit-btn-default-shadow: #6c757d;
+
+    --8bit-btn-disabled-bg: #495057;
+    --8bit-btn-disabled-shadow: #6c757d;
+  }
+}
+
+// 手动切换 dark mode
+[data-theme="dark"] {
+  --8bit-base-color: #fff;
+  --8bit-bg-color: #212529;
+  --8bit-container-bg: #212529;
+  --8bit-balloon-bg: #212529;
+  --8bit-input-bg: #2c3034;
+  --8bit-progress-bg: #2c3034;
+
+  --8bit-btn-default-bg: #343a40;
+  --8bit-btn-default-hover: #495057;
+  --8bit-btn-default-shadow: #6c757d;
+
+  --8bit-btn-disabled-bg: #495057;
+  --8bit-btn-disabled-shadow: #6c757d;
+}

@@ -1,0 +1,41 @@
+{
+  "name": "8bit.css",
+  "version": "1.0.0",
+  "description": "8-bit pixel style CSS framework",
+  "main": "css/8bit.css",
+  "style": "css/8bit.css",
+  "sass": "scss/8bit.scss",
+  "files": [
+    "css",
+    "scss"
+  ],
+  "scripts": {
+    "build": "sass scss/8bit.scss css/8bit.css && sass scss/8bit.scss css/8bit.min.css --style=compressed",
+    "build:core": "sass scss/8bit-core.scss css/8bit-core.css && sass scss/8bit-core.scss css/8bit-core.min.css --style=compressed",
+    "watch": "sass --watch scss/8bit.scss css/8bit.css",
+    "storybook": "storybook dev -p 6006",
+    "build-storybook": "storybook build",
+    "lint:scss": "stylelint \"scss/**/*.scss\"",
+    "lint:format": "prettier --check \"scss/**/*.scss\"",
+    "format": "prettier --write \"scss/**/*.scss\""
+  },
+  "keywords": [
+    "css",
+    "framework",
+    "8bit",
+    "pixel",
+    "retro",
+    "nes"
+  ],
+  "license": "MIT",
+  "devDependencies": {
+    "@storybook/addon-essentials": "^8.0.0",
+    "@storybook/html": "^8.0.0",
+    "@storybook/html-vite": "^8.0.0",
+    "prettier": "^3.0.0",
+    "sass": "^1.70.0",
+    "storybook": "^8.0.0",
+    "stylelint": "^16.0.0",
+    "stylelint-config-standard-scss": "^13.0.0"
+  }
+}

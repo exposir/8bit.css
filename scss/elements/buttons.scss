@@ -1,0 +1,98 @@
+@use "../utilities/mixins" as mix;
+
+.bit-btn {
+  @include mix.pixel-border-compact;
+
+  position: relative;
+  display: inline-block;
+  padding: 6px 8px;
+  margin: mix.$border-size;
+  text-align: center;
+  vertical-align: middle;
+  cursor: pointer;
+  user-select: none;
+  color: var(--8bit-base-color);
+  background-color: var(--8bit-btn-default-bg);
+  text-decoration: none;
+
+  &::after {
+    position: absolute;
+    inset: calc(-1 * mix.$border-size);
+    content: "";
+    box-shadow: inset -4px -4px var(--8bit-btn-default-shadow);
+  }
+
+  &:hover {
+    color: var(--8bit-base-color);
+    text-decoration: none;
+    background-color: var(--8bit-btn-default-hover);
+
+    &::after {
+      box-shadow: inset -6px -6px var(--8bit-btn-default-shadow);
+    }
+  }
+
+  &:focus {
+    outline: 0;
+    box-shadow: 0 0 0 6px rgb(0 0 0 / 20%);
+  }
+
+  &:active:not(.is-disabled)::after {
+    box-shadow: inset 4px 4px var(--8bit-btn-default-shadow);
+  }
+
+  // Variants
+  $variants: "primary", "success", "warning", "error";
+
+  @each $v in $variants {
+    &.is-#{$v} {
+      background-color: var(--8bit-btn-#{$v}-bg);
+
+      @if $v == "warning" {
+        color: var(--8bit-base-color);
+      } @else {
+        color: var(--8bit-color-white);
+      }
+
+      &::after {
+        box-shadow: inset -4px -4px var(--8bit-btn-#{$v}-shadow);
+      }
+
+      &:hover {
+        background-color: var(--8bit-btn-#{$v}-hover);
+
+        &::after {
+          box-shadow: inset -6px -6px var(--8bit-btn-#{$v}-shadow);
+        }
+      }
+
+      &:focus {
+        box-shadow: 0 0 0 6px rgb(from var(--8bit-btn-#{$v}-shadow) r g b / 30%);
+      }
+
+      &:active:not(.is-disabled)::after {
+        box-shadow: inset 4px 4px var(--8bit-btn-#{$v}-shadow);
+      }
+    }
+  }
+
+  &.is-disabled,
+  &.is-disabled:hover,
+  &.is-disabled:focus {
+    cursor: not-allowed;
+    background-color: var(--8bit-btn-disabled-bg);
+    box-shadow: inset -4px -4px var(--8bit-btn-disabled-shadow);
+    opacity: 0.6;
+  }
+
+  &.is-disabled:hover::after {
+    box-shadow: inset -4px -4px var(--8bit-btn-disabled-shadow);
+  }
+
+  // File input overlay
+  input[type="file"] {
+    position: absolute;
+    pointer-events: none;
+    opacity: 0;
+  }
+}

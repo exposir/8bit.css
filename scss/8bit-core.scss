@@ -1,0 +1,17 @@
+// Core build — variables, reboot, and essential form elements only.
+// Use this when you want minimal CSS without decorative components.
+
+// Base
+@use "base/variables";
+@use "base/reboot";
+@use "base/dark-mode";
+
+// Essential elements
+@use "elements/text";
+@use "elements/buttons";
+
+// Essential form
+@use "form/inputs";
+@use "form/checkboxes";
+@use "form/radios";
+@use "form/selects";

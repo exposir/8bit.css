@@ -1,0 +1,41 @@
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+}
+
+html {
+  font-size: var(--8bit-font-size);
+  -webkit-text-size-adjust: 100%;
+}
+
+body {
+  font-family: var(--8bit-font-family);
+  color: var(--8bit-base-color);
+  background-color: var(--8bit-bg-color);
+  line-height: 1.5;
+  -webkit-font-smoothing: antialiased;
+}
+
+a {
+  color: var(--8bit-btn-primary-bg);
+
+  &:hover {
+    color: var(--8bit-btn-primary-hover);
+  }
+}
+
+// Form elements don't inherit font by default in browsers
+button,
+input,
+select,
+textarea {
+  font-family: inherit;
+  font-size: inherit;
+  color: inherit;
+}
+
+img {
+  image-rendering: pixelated;
+  image-rendering: crisp-edges;
+}

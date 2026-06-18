@@ -1,0 +1,58 @@
+@use "../utilities/mixins" as mix;
+
+.bit-table {
+  width: 100%;
+  border-collapse: collapse;
+
+  thead {
+    border-bottom: 4px solid var(--8bit-base-color);
+  }
+
+  th,
+  td {
+    padding: 0.5rem 0.75rem;
+    text-align: left;
+    border-right: 4px solid var(--8bit-base-color);
+
+    &:last-child {
+      border-right: none;
+    }
+  }
+
+  tr {
+    border-bottom: 4px solid var(--8bit-base-color);
+
+    &:last-child {
+      border-bottom: none;
+    }
+  }
+
+  &.is-bordered {
+    @include mix.pixel-border;
+  }
+
+  &.is-dark {
+    color: var(--8bit-color-white);
+    background-color: var(--8bit-color-black);
+
+    thead {
+      border-bottom-color: var(--8bit-color-white);
+    }
+
+    th,
+    td {
+      border-right-color: var(--8bit-color-white);
+    }
+
+    tr {
+      border-bottom-color: var(--8bit-color-white);
+    }
+  }
+
+  &.is-centered {
+    th,
+    td {
+      text-align: center;
+    }
+  }
+}

@@ -1,0 +1,12 @@
+{
+  "extends": "stylelint-config-standard-scss",
+  "rules": {
+    "selector-class-pattern": "^(bit-|is-|from-)[a-z][a-z0-9-]*$",
+    "custom-property-pattern": "^8bit-[a-z][a-z0-9-]*$",
+    "scss/dollar-variable-pattern": "^[a-z][a-z0-9-]*$",
+    "color-named": "never",
+    "declaration-no-important": true,
+    "custom-property-empty-line-before": null,
+    "property-no-vendor-prefix": [true, { "ignoreProperties": ["text-size-adjust"] }]
+  }
+}

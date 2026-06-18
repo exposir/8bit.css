@@ -1,0 +1,19 @@
+.bit-badge {
+  display: inline-block;
+  padding: 2px 6px;
+  font-size: 0.6rem;
+  color: var(--8bit-color-white);
+  background-color: var(--8bit-base-color);
+  vertical-align: middle;
+
+  &.is-primary { background-color: var(--8bit-btn-primary-bg); }
+
+  &.is-success { background-color: var(--8bit-btn-success-bg); }
+
+  &.is-warning {
+    background-color: var(--8bit-btn-warning-bg);
+    color: var(--8bit-base-color);
+  }
+
+  &.is-error { background-color: var(--8bit-btn-error-bg); }
+}

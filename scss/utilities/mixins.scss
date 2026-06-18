@@ -1,0 +1,32 @@
+@use "sass:math";
+@use "sass:color";
+
+$border-size: 4px;
+
+@mixin pixel-border($c: #000) {
+  $r: math.round(color.channel($c, "red", $space: rgb));
+  $g: math.round(color.channel($c, "green", $space: rgb));
+  $b: math.round(color.channel($c, "blue", $space: rgb));
+
+  border-style: solid;
+  border-width: $border-size;
+  border-image: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" width="8" height="8"><path d="M3 1h2v1H3zM2 2h1v1H2zM5 2h1v1H5zM1 3h1v3H1zM6 3h1v3H6zM2 6h1v1H2zM5 6h1v1H5zM3 7h2v1H3z" fill="rgb(#{$r},#{$g},#{$b})"/></svg>') 3 / 3 / 2 stretch;
+
+  @supports ((-webkit-appearance: none) and (not (-moz-appearance: none))) {
+    border-image-repeat: space;
+  }
+}
+
+@mixin pixel-border-compact($c: #000) {
+  $r: math.round(color.channel($c, "red", $space: rgb));
+  $g: math.round(color.channel($c, "green", $space: rgb));
+  $b: math.round(color.channel($c, "blue", $space: rgb));
+
+  border-style: solid;
+  border-width: $border-size;
+  border-image: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" width="5" height="5"><path d="M2 1h1v1H2zM1 2h1v1H1zM3 2h1v1H3zM2 3h1v1H2z" fill="rgb(#{$r},#{$g},#{$b})"/></svg>') 2 / 2 / 2 stretch;
+
+  @supports ((-webkit-appearance: none) and (not (-moz-appearance: none))) {
+    border-image-repeat: space;
+  }
+}
