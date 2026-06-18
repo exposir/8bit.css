@@ -67,7 +67,7 @@
       }
 
       &:focus {
-        box-shadow: 0 0 0 6px rgb(from var(--8bit-btn-#{$v}-shadow) r g b / 30%);
+        box-shadow: 0 0 0 6px color-mix(in srgb, var(--8bit-btn-#{$v}-shadow) 30%, transparent);
       }
 
       &:active:not(.is-disabled)::after {

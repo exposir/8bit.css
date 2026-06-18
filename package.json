@@ -10,6 +10,7 @@
     "scss"
   ],
   "scripts": {
+    "prepare": "sass scss/8bit.scss css/8bit.css && sass scss/8bit.scss css/8bit.min.css --style=compressed && sass scss/8bit-core.scss css/8bit-core.css && sass scss/8bit-core.scss css/8bit-core.min.css --style=compressed",
     "build": "sass scss/8bit.scss css/8bit.css && sass scss/8bit.scss css/8bit.min.css --style=compressed",
     "build:core": "sass scss/8bit-core.scss css/8bit-core.css && sass scss/8bit-core.scss css/8bit-core.min.css --style=compressed",
     "watch": "sass --watch scss/8bit.scss css/8bit.css",
