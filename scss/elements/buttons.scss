@@ -34,7 +34,7 @@
 
   &:focus {
     outline: 0;
-    box-shadow: 0 0 0 6px rgb(0 0 0 / 20%);
+    box-shadow: 0 0 0 6px var(--8bit-focus-ring);
   }
 
   &:active:not(.is-disabled)::after {
@@ -48,8 +48,9 @@
     &.is-#{$v} {
       background-color: var(--8bit-btn-#{$v}-bg);
 
+      // Warning always needs dark text (yellow bg); others use white
       @if $v == "warning" {
-        color: var(--8bit-base-color);
+        color: var(--8bit-color-black);
       } @else {
         color: var(--8bit-color-white);
       }
@@ -67,7 +68,7 @@
       }
 
       &:focus {
-        box-shadow: 0 0 0 6px color-mix(in srgb, var(--8bit-btn-#{$v}-shadow) 30%, transparent);
+        box-shadow: 0 0 0 6px var(--8bit-focus-ring);
       }
 
       &:active:not(.is-disabled)::after {
@@ -76,17 +77,15 @@
     }
   }
 
-  &.is-disabled,
-  &.is-disabled:hover,
-  &.is-disabled:focus {
+  &.is-disabled {
     cursor: not-allowed;
     background-color: var(--8bit-btn-disabled-bg);
-    box-shadow: inset -4px -4px var(--8bit-btn-disabled-shadow);
     opacity: 0.6;
-  }
 
-  &.is-disabled:hover::after {
-    box-shadow: inset -4px -4px var(--8bit-btn-disabled-shadow);
+    &::after,
+    &:hover::after {
+      box-shadow: inset -4px -4px var(--8bit-btn-disabled-shadow);
+    }
   }
 
   // File input overlay

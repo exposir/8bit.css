@@ -19,6 +19,8 @@ $dark-border-compact-url: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3
     --8bit-btn-disabled-bg: #495057;
     --8bit-btn-disabled-shadow: #6c757d;
 
+    --8bit-focus-ring: rgb(255 255 255 / 30%);
+
     // stylelint-disable custom-property-pattern
     --8bit-border-url: #{$dark-border-url};
     --8bit-border-compact-url: #{$dark-border-compact-url};
@@ -41,6 +43,8 @@ $dark-border-compact-url: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3
 
   --8bit-btn-disabled-bg: #495057;
   --8bit-btn-disabled-shadow: #6c757d;
+
+  --8bit-focus-ring: rgb(255 255 255 / 30%);
 
   // stylelint-disable custom-property-pattern
   --8bit-border-url: #{$dark-border-url};

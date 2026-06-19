@@ -30,6 +30,7 @@
   --8bit-input-border-color: var(--8bit-color-black);
   --8bit-container-bg: #fff;
   --8bit-balloon-bg: #fff;
+  --8bit-focus-ring: rgb(0 0 0 / 30%);
   --8bit-border-url: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" width="8" height="8"><path d="M3 1h2v1H3zM2 2h1v1H2zM5 2h1v1H5zM1 3h1v3H1zM6 3h1v3H6zM2 6h1v1H2zM5 6h1v1H5zM3 7h2v1H3z" fill="rgb(33,37,41)"/></svg>');
   --8bit-border-compact-url: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" width="5" height="5"><path d="M2 1h1v1H2zM1 2h1v1H1zM3 2h1v1H3zM2 3h1v1H2z" fill="rgb(33,37,41)"/></svg>');
 }
@@ -87,6 +88,7 @@ img {
     --8bit-btn-default-shadow: #6c757d;
     --8bit-btn-disabled-bg: #495057;
     --8bit-btn-disabled-shadow: #6c757d;
+    --8bit-focus-ring: rgb(255 255 255 / 30%);
     --8bit-border-url: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" width="8" height="8"><path d="M3 1h2v1H3zM2 2h1v1H2zM5 2h1v1H5zM1 3h1v3H1zM6 3h1v3H6zM2 6h1v1H2zM5 6h1v1H5zM3 7h2v1H3z" fill="rgb(255,255,255)"/></svg>');
     --8bit-border-compact-url: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" width="5" height="5"><path d="M2 1h1v1H2zM1 2h1v1H1zM3 2h1v1H3zM2 3h1v1H2z" fill="rgb(255,255,255)"/></svg>');
   }
@@ -103,6 +105,7 @@ img {
   --8bit-btn-default-shadow: #6c757d;
   --8bit-btn-disabled-bg: #495057;
   --8bit-btn-disabled-shadow: #6c757d;
+  --8bit-focus-ring: rgb(255 255 255 / 30%);
   --8bit-border-url: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" width="8" height="8"><path d="M3 1h2v1H3zM2 2h1v1H2zM5 2h1v1H5zM1 3h1v3H1zM6 3h1v3H6zM2 6h1v1H2zM5 6h1v1H5zM3 7h2v1H3z" fill="rgb(255,255,255)"/></svg>');
   --8bit-border-compact-url: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" width="5" height="5"><path d="M2 1h1v1H2zM1 2h1v1H1zM3 2h1v1H3zM2 3h1v1H2z" fill="rgb(255,255,255)"/></svg>');
 }
@@ -178,7 +181,7 @@ img {
 }
 .bit-btn:focus {
   outline: 0;
-  box-shadow: 0 0 0 6px rgba(0, 0, 0, 0.2);
+  box-shadow: 0 0 0 6px var(--8bit-focus-ring);
 }
 .bit-btn:active:not(.is-disabled)::after {
   box-shadow: inset 4px 4px var(--8bit-btn-default-shadow);
@@ -197,7 +200,7 @@ img {
   box-shadow: inset -6px -6px var(--8bit-btn-primary-shadow);
 }
 .bit-btn.is-primary:focus {
-  box-shadow: 0 0 0 6px color-mix(in srgb, var(--8bit-btn-primary-shadow) 30%, transparent);
+  box-shadow: 0 0 0 6px var(--8bit-focus-ring);
 }
 .bit-btn.is-primary:active:not(.is-disabled)::after {
   box-shadow: inset 4px 4px var(--8bit-btn-primary-shadow);
@@ -216,14 +219,14 @@ img {
   box-shadow: inset -6px -6px var(--8bit-btn-success-shadow);
 }
 .bit-btn.is-success:focus {
-  box-shadow: 0 0 0 6px color-mix(in srgb, var(--8bit-btn-success-shadow) 30%, transparent);
+  box-shadow: 0 0 0 6px var(--8bit-focus-ring);
 }
 .bit-btn.is-success:active:not(.is-disabled)::after {
   box-shadow: inset 4px 4px var(--8bit-btn-success-shadow);
 }
 .bit-btn.is-warning {
   background-color: var(--8bit-btn-warning-bg);
-  color: var(--8bit-base-color);
+  color: var(--8bit-color-black);
 }
 .bit-btn.is-warning::after {
   box-shadow: inset -4px -4px var(--8bit-btn-warning-shadow);
@@ -235,7 +238,7 @@ img {
   box-shadow: inset -6px -6px var(--8bit-btn-warning-shadow);
 }
 .bit-btn.is-warning:focus {
-  box-shadow: 0 0 0 6px color-mix(in srgb, var(--8bit-btn-warning-shadow) 30%, transparent);
+  box-shadow: 0 0 0 6px var(--8bit-focus-ring);
 }
 .bit-btn.is-warning:active:not(.is-disabled)::after {
   box-shadow: inset 4px 4px var(--8bit-btn-warning-shadow);
@@ -254,18 +257,17 @@ img {
   box-shadow: inset -6px -6px var(--8bit-btn-error-shadow);
 }
 .bit-btn.is-error:focus {
-  box-shadow: 0 0 0 6px color-mix(in srgb, var(--8bit-btn-error-shadow) 30%, transparent);
+  box-shadow: 0 0 0 6px var(--8bit-focus-ring);
 }
 .bit-btn.is-error:active:not(.is-disabled)::after {
   box-shadow: inset 4px 4px var(--8bit-btn-error-shadow);
 }
-.bit-btn.is-disabled, .bit-btn.is-disabled:hover, .bit-btn.is-disabled:focus {
+.bit-btn.is-disabled {
   cursor: not-allowed;
   background-color: var(--8bit-btn-disabled-bg);
-  box-shadow: inset -4px -4px var(--8bit-btn-disabled-shadow);
   opacity: 0.6;
 }
-.bit-btn.is-disabled:hover::after {
+.bit-btn.is-disabled::after, .bit-btn.is-disabled:hover::after {
   box-shadow: inset -4px -4px var(--8bit-btn-disabled-shadow);
 }
 .bit-btn input[type=file] {
@@ -295,7 +297,7 @@ img {
 }
 .bit-input:focus {
   outline: 0;
-  box-shadow: 0 0 0 3px rgba(0, 0, 0, 0.15);
+  box-shadow: 0 0 0 3px var(--8bit-focus-ring);
 }
 .bit-input.is-error {
   color: var(--8bit-btn-error-bg);
@@ -351,7 +353,7 @@ textarea.bit-input {
 }
 .bit-checkbox input[type=checkbox]:focus {
   outline: 0;
-  box-shadow: 0 0 0 3px rgba(0, 0, 0, 0.15);
+  box-shadow: 0 0 0 3px var(--8bit-focus-ring);
 }
 .bit-checkbox input[type=checkbox][disabled] {
   opacity: 0.6;
@@ -393,7 +395,7 @@ textarea.bit-input {
 }
 .bit-radio input[type=radio]:focus {
   outline: 0;
-  box-shadow: 0 0 0 3px rgba(0, 0, 0, 0.15);
+  box-shadow: 0 0 0 3px var(--8bit-focus-ring);
 }
 .bit-radio input[type=radio][disabled] {
   opacity: 0.6;
@@ -426,7 +428,7 @@ textarea.bit-input {
 }
 .bit-select select:focus {
   outline: 0;
-  box-shadow: 0 0 0 3px rgba(0, 0, 0, 0.15);
+  box-shadow: 0 0 0 3px var(--8bit-focus-ring);
 }
 .bit-select select[disabled] {
   opacity: 0.6;

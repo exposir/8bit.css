@@ -33,6 +33,6 @@
   }
 
   &.is-rounded {
-    @include mix.pixel-border;
+    @include mix.pixel-border-compact;
   }
 }

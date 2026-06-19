@@ -6,8 +6,8 @@
   display: block;
   width: 100%;
   height: var(--8bit-progress-height);
+  margin: mix.$border-size;
   padding: 0;
-  overflow: hidden;
   appearance: none;
   background-color: var(--8bit-progress-bg);
 

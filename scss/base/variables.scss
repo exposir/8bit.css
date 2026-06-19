@@ -50,6 +50,9 @@
   // Balloon
   --8bit-balloon-bg: #fff;
 
+  // Focus ring — switches in dark mode
+  --8bit-focus-ring: rgb(0 0 0 / 30%);
+
   // Border SVG URLs — split out so dark mode can swap fill color
   // stylelint-disable custom-property-pattern
   --8bit-border-url: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" width="8" height="8"><path d="M3 1h2v1H3zM2 2h1v1H2zM5 2h1v1H5zM1 3h1v3H1zM6 3h1v3H6zM2 6h1v1H2zM5 6h1v1H5zM3 7h2v1H3z" fill="rgb(33,37,41)"/></svg>');

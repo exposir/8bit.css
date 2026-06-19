@@ -5,50 +5,89 @@
 
   position: relative;
   display: inline-block;
-  padding: 1rem;
+  padding: 1rem 1.5rem;
+  margin-bottom: 30px;
   background-color: var(--8bit-balloon-bg);
 
-  // Tail pointing down-left (default)
+  > :last-child { margin-bottom: 0; }
+
   &::before,
   &::after {
     position: absolute;
-    bottom: -14px;
-    left: 2rem;
-    display: block;
-    width: 4px;
-    height: 4px;
     content: "";
-    background-color: var(--8bit-base-color);
-    box-shadow:
-      0 4px 0 var(--8bit-base-color),
-      4px 4px 0 var(--8bit-base-color),
-      4px 8px 0 var(--8bit-base-color);
   }
 
-  &::after {
-    bottom: -18px;
-    background-color: var(--8bit-balloon-bg);
-    box-shadow:
-      0 4px 0 var(--8bit-balloon-bg),
-      4px 4px 0 var(--8bit-balloon-bg);
+  // Tail pointing down from left position (default)
+  &,
+  &.from-left {
+    &::before,
+    &::after { left: 2rem; }
+
+    &::before {
+      bottom: -14px;
+      width: 26px;
+      height: 10px;
+      background-color: var(--8bit-balloon-bg);
+      border-right: 4px solid var(--8bit-base-color);
+      border-left: 4px solid var(--8bit-base-color);
+    }
+
+    &::after {
+      bottom: -18px;
+      width: 18px;
+      height: 4px;
+      margin-right: 8px;
+      color: var(--8bit-base-color);
+      background-color: var(--8bit-balloon-bg);
+
+      // stylelint-disable shorthand-property-no-redundant-values
+      box-shadow:
+        -4px 0,
+        4px 0,
+        -4px 4px var(--8bit-balloon-bg),
+        0 4px,
+        -8px 4px,
+        -4px 8px,
+        -8px 8px;
+      // stylelint-enable shorthand-property-no-redundant-values
+    }
   }
 
-  // Tail pointing down-right
+  // Tail pointing down from right position
   &.from-right {
     &::before,
     &::after {
       right: 2rem;
       left: auto;
-      box-shadow:
-        0 4px 0 var(--8bit-base-color),
-        -4px 4px 0 var(--8bit-base-color),
-        -4px 8px 0 var(--8bit-base-color);
+    }
+
+    &::before {
+      bottom: -14px;
+      width: 26px;
+      height: 10px;
+      background-color: var(--8bit-balloon-bg);
+      border-right: 4px solid var(--8bit-base-color);
+      border-left: 4px solid var(--8bit-base-color);
     }
 
     &::after {
+      bottom: -18px;
+      width: 18px;
+      height: 4px;
+      margin-left: 8px;
+      color: var(--8bit-base-color);
+      background-color: var(--8bit-balloon-bg);
+
+      // stylelint-disable shorthand-property-no-redundant-values
       box-shadow:
-        0 4px 0 var(--8bit-balloon-bg),
-        -4px 4px 0 var(--8bit-balloon-bg);
+        -4px 0,
+        4px 0,
+        4px 4px var(--8bit-balloon-bg),
+        0 4px,
+        8px 4px,
+        4px 8px,
+        8px 8px;
+      // stylelint-enable shorthand-property-no-redundant-values
     }
   }
 }
